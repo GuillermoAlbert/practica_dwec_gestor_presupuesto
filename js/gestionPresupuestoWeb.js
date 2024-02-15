@@ -475,4 +475,17 @@ function cargarGastosWeb() {
 	repintar()
 }
 
+// Función cargarGastosApi que se utiliza como manejador de eventos del evento click del botón cargar-gastos-api
+async function cargarGastosApi() {
+	let respuesta = await fetch("https://suhhtqjccd.execute-api.eu-west-1.amazonaws.com/latest/guillermoalbert")
+
+	if (respuesta.ok) {
+		let listadoGastos = await respuesta.json()
+		gestionPresupuesto.cargarGastos(listadoGastos)
+		repintar()
+	} else {
+		alert("Error-HTTP: " + respuesta.status)
+	}
+}
+
 export { mostrarDatoEnId, mostrarGastoWeb, mostrarGastosAgrupadosWeb, actualizarPresupuestoWeb, nuevoGastoWeb, EditarHandle, BorrarHandle, CancelarFormularioHandle, EditarHandleFormulario, nuevoGastoWebFormulario, filtrarGastoWeb, guardarGastosWeb, cargarGastosWeb }
